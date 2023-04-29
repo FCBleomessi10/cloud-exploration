@@ -33,3 +33,4 @@ build/
 .vscode/
 /out/
 /cloud-provider-payment8001/src/main/resources/postman/
+/cloud-consumer-order80/src/main/resources/postman/

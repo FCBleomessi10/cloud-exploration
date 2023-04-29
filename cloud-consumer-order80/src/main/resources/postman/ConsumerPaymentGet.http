@@ -1,0 +1,4 @@
+GET http://localhost:80/consumer/payment/get/1
+Accept: application/json
+
+###

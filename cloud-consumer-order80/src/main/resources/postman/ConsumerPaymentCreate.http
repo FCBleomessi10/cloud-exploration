@@ -1,0 +1,5 @@
+GET http://localhost:80/consumer/payment/create?serial=1004
+Accept: application/json
+
+###
+
