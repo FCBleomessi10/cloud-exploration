@@ -1,4 +1,4 @@
-GET http://localhost:80/consumer/payment/create?serial=1004
+GET http://localhost:80/consumer/payment/create?serial=2002
 Accept: application/json
 
 ###
