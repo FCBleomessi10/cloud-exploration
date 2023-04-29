@@ -3,10 +3,7 @@ package com.shu.springcloud.controller;
 import com.shu.springcloud.entities.CommonResult;
 import com.shu.springcloud.entities.Payment;
 import com.shu.springcloud.service.PaymentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -17,7 +14,7 @@ public class PaymentController {
     private PaymentService paymentService;
 
     @PostMapping("/payment/create")
-    public CommonResult<Integer> create(Payment payment) {
+    public CommonResult<Integer> create(@RequestBody Payment payment) {
         int result = paymentService.create(payment);
         if (result > 0) {
             return new CommonResult<>(200, "插入成功", result);
