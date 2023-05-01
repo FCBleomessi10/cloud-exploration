@@ -1,7 +1,6 @@
 server:
   port: 8001
   address: 127.0.0.1
-
 spring:
   application:
     name: cloud-payment-service
@@ -11,7 +10,12 @@ spring:
     url: jdbc:mysql://139.196.149.231:3306/cloud?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: 19981215yinA
-
 mybatis:
   mapperLocations: classpath:mapper/*.xml
   type-aliases-package: com.shu.springcloud.entities
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka
