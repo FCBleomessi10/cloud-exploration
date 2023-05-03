@@ -1,12 +1,16 @@
 package com.shu.springcloud.controller;
 
+import com.oracle.tools.packager.Log;
 import com.shu.springcloud.entities.CommonResult;
 import com.shu.springcloud.entities.Payment;
 import com.shu.springcloud.service.PaymentService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 public class PaymentController {
@@ -16,6 +20,9 @@ public class PaymentController {
 
     @Value("${server.port}")
     private String serverPort;
+
+    @Resource
+    private DiscoveryClient discoveryClient;
 
     @PostMapping("/payment/create")
     public CommonResult<Integer> create(@RequestBody Payment payment) {
@@ -35,5 +42,20 @@ public class PaymentController {
         } else {
             return new CommonResult<>(444, "没有记录", null);
         }
+    }
+
+    @GetMapping("/payment/discovery")
+    public Object discovery() {
+        List<String> services = discoveryClient.getServices();
+        for (String element : services) {
+            Log.info("****element: " + element);
+        }
+
+        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
+        for (ServiceInstance instance : instances) {
+            Log.info(instance.getServiceId() + "\t" + instance.getHost() + "\t" + instance.getPort() +
+                    "\t" + instance.getUri());
+        }
+        return this.discoveryClient;
     }
 }
